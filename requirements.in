@@ -1,0 +1,7 @@
+transformers
+bentoml
+torch
+torchaudio
+vocos
+nltk
+optimum[onnxruntime-gpu]

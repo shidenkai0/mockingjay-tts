@@ -1,0 +1,11 @@
+-c requirements.txt
+python-dotenv
+ipykernel
+pytest
+pytest-asyncio
+black
+isort
+pydocstyle
+mypy
+pre-commit
+flake8
