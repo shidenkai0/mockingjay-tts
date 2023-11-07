@@ -1,0 +1,10 @@
+service: "tts_service:svc"
+include:
+- "*.py"
+python:
+    packages:
+    - torch
+    - torchvision
+    - torchaudio
+    # extra_index_url:
+    # - "https://download.pytorch.org/whl/cu117"
