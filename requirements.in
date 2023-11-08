@@ -1,8 +1,7 @@
-transformers
+transformers==4.34.1
 bentoml
 torch
 torchaudio
 vocos
 nltk
-optimum[onnxruntime-gpu]
 scipy

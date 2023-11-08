@@ -3,9 +3,6 @@ import transformers
 from bark_vocos import BarkVocos
 from processing_bark import BarkProcessor
 
-from transformers.models import speecht5
-import types
-
 model_id = "suno/bark"
 
 processor = BarkProcessor.from_pretrained(model_id)

@@ -1,10 +1,15 @@
-service: "tts_service:svc"
+service: 'tts_service:svc'
+labels:
 include:
-- "*.py"
+- '*.py'
+models:
+- bark_processor:bpvjlut5tsppwbgz
+- bark_vocos_model:ixpsgll5tssmwbgz
 python:
-    packages:
-    - torch
-    - torchvision
-    - torchaudio
-    # extra_index_url:
-    # - "https://download.pytorch.org/whl/cu117"
+  packages:
+  - torch
+  - torchaudio
+docker:
+  distro: debian
+  python_version: "3.11"
+  cuda_version: "12.1"
