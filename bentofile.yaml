@@ -2,13 +2,14 @@ service: 'tts_service:svc'
 labels:
 include:
 - '*.py'
+- 'voice_presets'
+exclude:
+- '.venv'
 models:
 - bark_processor:bpvjlut5tsppwbgz
 - bark_vocos_model:ixpsgll5tssmwbgz
 python:
-  packages:
-  - torch
-  - torchaudio
+  requirements_txt: requirements.txt
 docker:
   distro: debian
   python_version: "3.11"

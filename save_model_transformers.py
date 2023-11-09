@@ -1,5 +1,4 @@
 import bentoml
-import transformers
 from bark_vocos import BarkVocos
 from processing_bark import BarkProcessor
 

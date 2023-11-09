@@ -21,9 +21,8 @@ class BarkProcessorRunnable(bentoml.Runnable):
 
     @bentoml.Runnable.method(batchable=False)
     def process(self, input: str, voice_preset: str) -> Dict:
-        input_sentences = nltk.tokenize.sent_tokenize(input)
+        input_sentences = nltk.tokenize.sent_tokenize(input)  # TODO: check if this does what we want
         inputs = self.processor(input_sentences, voice_preset=voice_preset)
-        print(f"inputs (in processor): {inputs}")
         return inputs
 
 
@@ -36,9 +35,9 @@ input_spec = bentoml.io.JSON.from_sample({"text": "Hey", "voice_preset": "voice_
 
 
 @svc.api(input=input_spec, output=bentoml.io.File())
-async def generate(input: Dict[str, str]) -> bytes:
-    torch.manual_seed(48)
-    inputs = await processor_runner.process.async_run(input["text"], input["voice_preset"])
+def generate(input: Dict[str, str]) -> bytes:
+    torch.manual_seed(46)
+    inputs = processor_runner.run(input["text"], input["voice_preset"])
     # move to GPU if available, this is a workaround for async_run
     if torch.cuda.is_available():
         for k, v in inputs.items():
@@ -48,8 +47,7 @@ async def generate(input: Dict[str, str]) -> bytes:
                 for kk, vv in v.items():
                     if isinstance(vv, torch.Tensor):
                         inputs[k][kk] = vv.cuda()
-    print(f"inputs: {inputs}")
-    output = await tts_model_runner.generate.async_run(**inputs)
+    output = tts_model_runner.generate.run(**inputs)
 
     # Assume output is a numpy array with a proper shape and dtype for audio data
     # And sample_rate is the audio sample rate
@@ -57,7 +55,7 @@ async def generate(input: Dict[str, str]) -> bytes:
 
     # Convert the numpy array to a WAV file in memory
     buffer = io.BytesIO()
-    np_output = output.cpu().numpy().astype(np.float32)
+    np_output = output.cpu().numpy()
     write(buffer, sample_rate, np_output)
     buffer.seek(0)  # Seek back to the start of the buffer
 
