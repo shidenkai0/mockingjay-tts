@@ -4,8 +4,14 @@
 #
 #    pip-compile requirements.in
 #
+accelerate==0.24.1
+    # via optimum
 aiohttp==3.8.6
-    # via bentoml
+    # via
+    #   bentoml
+    #   datasets
+    #   fsspec
+    #   runpod
 aiosignal==1.3.1
     # via aiohttp
 anyio==4.0.0
@@ -26,6 +32,12 @@ attrs==23.1.0
     #   cattrs
 bentoml==1.1.8
     # via -r requirements.in
+boto3==1.33.11
+    # via runpod
+botocore==1.33.11
+    # via
+    #   boto3
+    #   s3transfer
 build==1.0.3
     # via pip-tools
 cattrs==23.1.2
@@ -52,32 +64,51 @@ click-option-group==0.5.6
     # via bentoml
 cloudpickle==3.0.0
     # via bentoml
+coloredlogs==15.0.1
+    # via
+    #   onnxruntime-gpu
+    #   optimum
 contextlib2==21.6.0
     # via schema
+datasets==2.14.6
+    # via
+    #   evaluate
+    #   optimum
 deepmerge==1.1.0
     # via bentoml
 deprecated==1.2.14
     # via opentelemetry-api
+dill==0.3.7
+    # via
+    #   datasets
+    #   evaluate
+    #   multiprocess
 einops==0.7.0
     # via
     #   encodec
     #   vocos
 encodec==0.1.1
     # via vocos
+evaluate==0.4.1
+    # via optimum
 filelock==3.13.1
     # via
     #   huggingface-hub
     #   torch
     #   transformers
     #   triton
+flatbuffers==23.5.26
+    # via onnxruntime-gpu
 frozenlist==1.4.0
     # via
     #   aiohttp
     #   aiosignal
 fs==2.4.16
     # via bentoml
-fsspec==2023.10.0
+fsspec[http]==2023.10.0
     # via
+    #   datasets
+    #   evaluate
     #   huggingface-hub
     #   torch
 h11==0.14.0
@@ -90,9 +121,15 @@ httpx==0.25.1
     # via bentoml
 huggingface-hub==0.17.3
     # via
+    #   accelerate
+    #   datasets
+    #   evaluate
+    #   optimum
     #   tokenizers
     #   transformers
     #   vocos
+humanfriendly==10.0
+    # via coloredlogs
 idna==3.4
     # via
     #   anyio
@@ -107,6 +144,10 @@ jinja2==3.1.2
     # via
     #   bentoml
     #   torch
+jmespath==1.0.1
+    # via
+    #   boto3
+    #   botocore
 joblib==1.3.2
     # via nltk
 markdown-it-py==3.0.0
@@ -121,14 +162,26 @@ multidict==6.0.4
     # via
     #   aiohttp
     #   yarl
+multiprocess==0.70.15
+    # via
+    #   datasets
+    #   evaluate
 networkx==3.2.1
     # via torch
 nltk==3.8.1
     # via -r requirements.in
 numpy==1.26.1
     # via
+    #   accelerate
     #   bentoml
+    #   datasets
     #   encodec
+    #   evaluate
+    #   onnx
+    #   onnxruntime-gpu
+    #   optimum
+    #   pandas
+    #   pyarrow
     #   scipy
     #   transformers
     #   vocos
@@ -163,6 +216,10 @@ nvidia-nvjitlink-cu12==12.3.52
     #   nvidia-cusparse-cu12
 nvidia-nvtx-cu12==12.1.105
     # via torch
+onnx==1.15.0
+    # via optimum
+onnxruntime-gpu==1.16.2
+    # via optimum
 opentelemetry-api==1.20.0
     # via
     #   bentoml
@@ -192,25 +249,47 @@ opentelemetry-util-http==0.41b0
     #   bentoml
     #   opentelemetry-instrumentation-aiohttp-client
     #   opentelemetry-instrumentation-asgi
+optimum[onnxruntime-gpu]==1.14.0
+    # via -r requirements.in
 packaging==23.2
     # via
+    #   accelerate
     #   bentoml
     #   build
+    #   datasets
+    #   evaluate
     #   huggingface-hub
+    #   onnxruntime-gpu
+    #   optimum
     #   pip-requirements-parser
     #   transformers
+pandas==2.1.2
+    # via
+    #   datasets
+    #   evaluate
 pathspec==0.11.2
     # via bentoml
+pillow==10.1.0
+    # via runpod
 pip-requirements-parser==32.0.1
     # via bentoml
 pip-tools==7.3.0
     # via bentoml
 prometheus-client==0.18.0
     # via bentoml
+protobuf==4.25.0
+    # via
+    #   onnx
+    #   onnxruntime-gpu
+    #   optimum
+    #   transformers
 psutil==5.9.6
     # via
+    #   accelerate
     #   bentoml
     #   circus
+pyarrow==14.0.1
+    # via datasets
 pygments==2.16.1
     # via rich
 pynvml==11.5.0
@@ -220,14 +299,23 @@ pyparsing==3.1.1
 pyproject-hooks==1.0.0
     # via build
 python-dateutil==2.8.2
-    # via bentoml
+    # via
+    #   bentoml
+    #   botocore
+    #   pandas
+python-dotenv==1.0.0
+    # via runpod
 python-json-logger==2.0.7
     # via bentoml
 python-multipart==0.0.6
     # via bentoml
+pytz==2023.3.post1
+    # via pandas
 pyyaml==6.0.1
     # via
+    #   accelerate
     #   bentoml
+    #   datasets
     #   huggingface-hub
     #   transformers
     #   vocos
@@ -240,10 +328,21 @@ regex==2023.10.3
 requests==2.31.0
     # via
     #   bentoml
+    #   datasets
+    #   evaluate
+    #   fsspec
     #   huggingface-hub
+    #   responses
+    #   runpod
     #   transformers
+responses==0.18.0
+    # via evaluate
 rich==13.6.0
     # via bentoml
+runpod==0.7.6
+    # via -r requirements.in
+s3transfer==0.8.2
+    # via boto3
 safetensors==0.4.0
     # via transformers
 schema==0.7.5
@@ -252,6 +351,8 @@ scipy==1.11.3
     # via
     #   -r requirements.in
     #   vocos
+sentencepiece==0.1.99
+    # via transformers
 simple-di==0.1.5
     # via bentoml
 six==1.16.0
@@ -265,13 +366,18 @@ sniffio==1.3.0
 starlette==0.32.0.post1
     # via bentoml
 sympy==1.12
-    # via torch
+    # via
+    #   onnxruntime-gpu
+    #   optimum
+    #   torch
 tokenizers==0.14.1
     # via transformers
 torch==2.1.0
     # via
     #   -r requirements.in
+    #   accelerate
     #   encodec
+    #   optimum
     #   torchaudio
     #   vocos
 torchaudio==2.1.0
@@ -283,11 +389,15 @@ tornado==6.3.3
     # via circus
 tqdm==4.66.1
     # via
+    #   datasets
+    #   evaluate
     #   huggingface-hub
     #   nltk
     #   transformers
-transformers==4.34.1
-    # via -r requirements.in
+transformers[sentencepiece]==4.34.1
+    # via
+    #   -r requirements.in
+    #   optimum
 triton==2.1.0
     # via torch
 typing-extensions==4.8.0
@@ -295,8 +405,14 @@ typing-extensions==4.8.0
     #   huggingface-hub
     #   opentelemetry-sdk
     #   torch
+tzdata==2023.3
+    # via pandas
 urllib3==2.0.7
-    # via requests
+    # via
+    #   botocore
+    #   requests
+    #   responses
+    #   runpod
 uvicorn==0.24.0.post1
     # via bentoml
 vocos==0.1.0
@@ -310,6 +426,10 @@ wrapt==1.15.0
     #   deprecated
     #   opentelemetry-instrumentation
     #   opentelemetry-instrumentation-aiohttp-client
+xxhash==3.4.1
+    # via
+    #   datasets
+    #   evaluate
 yarl==1.9.2
     # via aiohttp
 zipp==3.17.0

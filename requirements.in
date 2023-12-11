@@ -5,3 +5,5 @@ torchaudio
 vocos
 nltk
 scipy
+optimum[onnxruntime-gpu]
+runpod
