@@ -1,5 +1,4 @@
 transformers==4.34.1
-bentoml
 torch
 torchaudio
 vocos

@@ -1,3 +1,0 @@
-version: 1
-api_server:
-  workers: 2

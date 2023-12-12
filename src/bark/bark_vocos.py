@@ -1,6 +1,6 @@
 import torch
 import torchaudio
-from modeling_bark import BarkModel
+from bark.modeling_bark import BarkModel
 from vocos import Vocos
 
 
